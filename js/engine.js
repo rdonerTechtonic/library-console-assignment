@@ -2,14 +2,27 @@ function Library() {
   this.bookShelf = new Array();
 };
 
+// (function() {//SINGLETON
+//  var instance;
+//  Library = function() {
+//    if (instance) { //if a instance of library already exists this will point the newly made library to the Singleton instance
+//      return instance;
+//    }
+//    instance = this; //if a instance of library does not yet exist this will get and set the instance name for the new library
+//  }
+// })();
+
+
+
 Library.prototype.addBook = function(book) {
   for (var i in this.bookShelf) {
     if (this.bookShelf[i].title === book.title) {
       return false;
     }
   }
-  this.saveLibrary();
   this.bookShelf.push(book);
+  this.saveLibrary();
+
   return true;
 }
 
@@ -61,7 +74,6 @@ Library.prototype.getBookByAuthor = function(author) {
 Library.prototype.addBooks = function(books) {
   booksAdded = 0;
   for (var i = 0; i < books.length; i++) {
-    // console.log(books[i]);
     this.addBook(books[i]);
     booksAdded++;
   }
@@ -98,16 +110,53 @@ Library.prototype.getRandomAuthorName = function() {
   return this.bookShelf[randomIndex].author;
 }
 
-Library.prototype.searchFunction = function() {
-
+Library.prototype.searchFunction = function(oBook) {
+  var retrievedBooks = [];
+  if (oBook.hasOwnProperty("title")) {
+    for (var i = 0; i < this.bookShelf.length; i++) {
+      if (oBook.title === this.bookShelf[i].title) {
+        retrievedBooks.push(this.bookShelf[i]);
+      }
+    }
+  }
+  if (oBook.hasOwnProperty("author")) {
+    for (var i = 0; i < this.bookShelf.length; i++) {
+      if (oBook.author === this.bookShelf[i].author) {
+        console.log("Works");
+        retrievedBooks.push(this.bookShelf[i]);
+      }
+    }
+  }
+  if (oBook.hasOwnProperty("numPages")) {
+    for (var i = 0; i < this.bookShelf.length; i++) {
+      if (oBook.numPages === this.bookShelf[i].numPages) {
+        retrievedBooks.push(this.bookShelf[i]);
+      }
+    }
+  }
+  if (oBook.hasOwnProperty("pubDate")) {
+    for (var i = 0; i < this.bookShelf.length; i++) {
+      if (oBook.pubDate === this.bookShelf[i].pubDate) {
+        retrievedBooks.push(this.bookShelf[i]);
+      }
+    }
+  }
+  return retrievedBooks;
 }
 
 Library.prototype.saveLibrary = function() {
-    localStorage.setItem("library", JSON.stringify(this));
+  localStorage.setItem("library", JSON.stringify(this.bookShelf));
+}
+
+Library.prototype.getLibrary = function() {
+  var books = JSON.parse(localStorage.getItem("library"));
+  for (var i = 0; i < books.length; i++) {
+    this.addBook(books[i]);
   }
+  return this.bookShelf;
+}
 
 document.addEventListener("DOMContentLoaded", function(e) {
-  //add global instance
   window.gLibrary = new Library;
 
   window.gLibrary.bookShelf[0] = new Book("harry potter", "jk", "1000", "10/10/10");
@@ -116,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   window.gLibrary.bookShelf[3] = new Book("the shining", "e", 200, "dec 1");
   window.gLibrary.bookShelf[4] = new Book("book", "f", 200, "dec 1");
   window.gLibrary.bookShelf[5] = new Book("book2", "d", 200, "dec 1");
-
+  //
   book1 = new Book("harry potter", "jk rowling", "1000", "10/10/10");
   book2 = new Book("all the pretty horses", "cormac mccarthy", "2000", "1/1/18");
   book3 = new Book("it", "sk", 200, "jan 1");

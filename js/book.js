@@ -2,9 +2,10 @@ function Book(title, author, numPages, pubDate) {
   this.title = title;
   this.author = author;
   this.numPages = numPages;
+  this.pubDate = pubDate;
   // var date = new Date(pubDate);
   // this.pubDate = date.getUTCFullYear();
-  this.pubDate = new Date(pubDate);
+  // this.pubDate = new Date(pubDate);
 };
 
 Book.prototype.editBook = function(oBook) {
