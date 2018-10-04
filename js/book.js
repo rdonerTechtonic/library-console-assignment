@@ -2,43 +2,33 @@ function Book(title, author, numPages, pubDate) {
   this.title = title;
   this.author = author;
   this.numPages = numPages;
-  this.pubDate = pubDate; //use a date object
+  // var date = new Date(pubDate);
+  // this.pubDate = date.getUTCFullYear();
+  this.pubDate = new Date(pubDate);
 };
 
 Book.prototype.editBook = function(oBook) {
 
-  //oBook.title
-  //oBook.author
-  //oBook.numPages
-  //oBook.publishDate
-
-  //gLibrary.bookShelf[0].editBook();
-  // console.log(this);
-  // }
-  //for each property, replace the book property with the matching property
-  // {title: "string", author: "string", numPages: num}
-
-if (oBook.hasOwnProperty("title")) {
-  this.title = oBook.title;
-}
-if (oBook.hasOwnProperty("author")) {
-  this.author = oBook.author;
-}
-if (oBook.hasOwnProperty("numPages")) {
-  this.numPages = oBook.numPages;
+  if (oBook.hasOwnProperty("title")) {
+    this.title = oBook.title;
+  }
+  if (oBook.hasOwnProperty("author")) {
+    this.author = oBook.author;
+  }
+  if (oBook.hasOwnProperty("numPages")) {
+    this.numPages = oBook.numPages;
+  }
+  return this;
 }
 
-return this;
-
-
-
-// console.log(Object.keys(oBook));
-//   for (var property in Object.keys(oBook)) {
-//     if (this.hasOwnProperty(Object.keys(oBook)[property])) {
-//       this.property = property;
-//       console.log('hi')
+// var properties = Object.keys(oBook);
+//  console.log(properties);
+// // console.log(Object.keys(oBook));
+//   for (var i=0; i<properties.length; i++) {
+//     if (this.hasOwnProperty(properties[i])) {
+//       console.log(oBook.i);
+//       // console.log(this)
 //     // }
-//   }
-//   return this;
+//   // }
 // }
-}
+// return this;
