@@ -8,6 +8,7 @@ Library.prototype.addBook = function(book) {
       return false;
     }
   }
+  this.saveLibrary();
   this.bookShelf.push(book);
   return true;
 }
@@ -16,6 +17,7 @@ Library.prototype.removeBookByTitle = function(title) {
   for (var i in this.bookShelf) {
     if (this.bookShelf[i].title === title) {
       this.bookShelf.splice(i, 1);
+      this.saveLibrary();
       return true;
     }
   }
@@ -26,9 +28,11 @@ Library.prototype.removeBookByAuthor = function(author) {
   for (var i in this.bookShelf) {
     if (this.bookShelf[i].author === author) {
       this.bookShelf.splice(i, 1);
+      this.saveLibrary();
       return true;
     }
   }
+
   return false;
 }
 
@@ -61,10 +65,10 @@ Library.prototype.addBooks = function(books) {
     this.addBook(books[i]);
     booksAdded++;
   }
+  this.saveLibrary();
   return booksAdded;
 }
 
-//find distinct authors
 Library.prototype.getAuthors = function() {
   var uniqueAuthors = [];
   var count = 0;
@@ -73,17 +77,17 @@ Library.prototype.getAuthors = function() {
   for (var i = 0; i < this.bookShelf.length; i++) {
     for (var j = 0; j < uniqueAuthors.length; j++) {
       if (this.bookShelf[i].author == uniqueAuthors[j]) {
-          found = true;
-        }
+        found = true;
       }
-      count++;
-      if (count == 1 && found == false) {
-        uniqueAuthors.push(this.bookShelf[i].author);
-      }
-      count = 0;
-      found = false;
     }
-    return uniqueAuthors;
+    count++;
+    if (count == 1 && found == false) {
+      uniqueAuthors.push(this.bookShelf[i].author);
+    }
+    count = 0;
+    found = false;
+  }
+  return uniqueAuthors;
 }
 
 Library.prototype.getRandomAuthorName = function() {
@@ -93,6 +97,14 @@ Library.prototype.getRandomAuthorName = function() {
   var randomIndex = Math.floor(Math.random() * this.bookShelf.length);
   return this.bookShelf[randomIndex].author;
 }
+
+Library.prototype.searchFunction = function() {
+
+}
+
+Library.prototype.saveLibrary = function() {
+    localStorage.setItem("library", JSON.stringify(this));
+  }
 
 document.addEventListener("DOMContentLoaded", function(e) {
   //add global instance
