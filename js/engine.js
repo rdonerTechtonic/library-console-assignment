@@ -98,12 +98,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
   //add global instance
   window.gLibrary = new Library;
 
-  // window.gLibrary.bookShelf[0] = new Book("harry potter", "jk", "1000", "10/10/10");
-  // window.gLibrary.bookShelf[1] = new Book("all the pretty horses", "jk", "2000", "1/1/18");
-  // window.gLibrary.bookShelf[2] = new Book("it", "a", 200, "jan 1");
-  // window.gLibrary.bookShelf[3] = new Book("the shining", "e", 200, "dec 1");
-  // window.gLibrary.bookShelf[4] = new Book("book", "f", 200, "dec 1");
-  // window.gLibrary.bookShelf[5] = new Book("book2", "d", 200, "dec 1");
+  window.gLibrary.bookShelf[0] = new Book("harry potter", "jk", "1000", "10/10/10");
+  window.gLibrary.bookShelf[1] = new Book("all the pretty horses", "jk", "2000", "1/1/18");
+  window.gLibrary.bookShelf[2] = new Book("it", "a", 200, "jan 1");
+  window.gLibrary.bookShelf[3] = new Book("the shining", "e", 200, "dec 1");
+  window.gLibrary.bookShelf[4] = new Book("book", "f", 200, "dec 1");
+  window.gLibrary.bookShelf[5] = new Book("book2", "d", 200, "dec 1");
 
   book1 = new Book("harry potter", "jk rowling", "1000", "10/10/10");
   book2 = new Book("all the pretty horses", "cormac mccarthy", "2000", "1/1/18");
